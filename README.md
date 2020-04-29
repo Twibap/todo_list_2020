@@ -1,3 +1,3 @@
-# TODO List 2020
+# TODO List
 
 React Study App 2020
