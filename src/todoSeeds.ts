@@ -9,7 +9,7 @@ export interface ITodo {
     due?: Date;
 }
 
-const seeds: ITodo[] = [
+export const seeds: ITodo[] = [
     {
         id: 1,
         title: "Study React.js",
