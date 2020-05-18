@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import { ITodo, seeds } from './todoSeeds';
+import InputTodo from './InputTodo';
 
 function TodoList(props: ITodo) {
   const [state, setState] = useState({
@@ -27,12 +28,27 @@ function TodoList(props: ITodo) {
 }
 
 function App() {
+  const [state, setState] = useState({
+    todoList: seeds,
+  });
+
+  const addTodoItem = (item: ITodo) => {
+    setState({ todoList: state.todoList.concat(item) });
+  };
+
   return (
     <div className="App">
       <h1>ToDo List</h1>
-      <div>{seeds.map(seed => {
-        return TodoList(seed)
-      })}</div>
+      <label><input type="checkbox" name="isShown"/> 한 일 치우기</label>
+      <hr/>
+      <div>
+        {
+          state.todoList.map(seed => {
+            return TodoList(seed)
+          })
+        }
+      </div>
+      <InputTodo targetList={state.todoList} onSubmit={addTodoItem}/>
     </div>
   );
 }
