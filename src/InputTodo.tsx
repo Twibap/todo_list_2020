@@ -8,24 +8,24 @@ export interface IInputTodoProps {
 
 export default function InputTodo(props : IInputTodoProps){
     const [state, setState] = useState({
-        title: String,
+        title: "",
         // dueDate: Date,
-        isImportant: Boolean,
-        content: String,
+        isImportant: false,
+        content: "",
     });
     const submitMeno = (event: React.FormEvent) => {
         // alert("입력되었습니다.");
         const todo: ITodo = {
             id: props.targetList.length,
-            title: state.title(),
-            content: state.content(),
-            important: state.isImportant(),
+            title: state.title,
+            content: state.content,
+            important: state.isImportant,
             createdAt: new Date(),
             updatedAt: new Date(),
             checked: false,
         };
         props.onSubmit(todo);
-        // event.preventDefault();
+        event.preventDefault();
     }
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const target = event.target;

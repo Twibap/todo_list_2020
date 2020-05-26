@@ -3,14 +3,14 @@ import './App.css';
 import { ITodo, seeds } from './todoSeeds';
 import InputTodo from './InputTodo';
 
-function TodoList(props: ITodo) {
+function TodoList(props: { todo: ITodo }) {
   const [state, setState] = useState({
-    isDone: props.checked
+    isDone: props.todo.checked
   });
   return (
-    <div key={props.id}>
-      <h2>{props.title}</h2>
-      <p>생성일 : {props.createdAt.toDateString()}</p>
+    <div key={props.todo.id}>
+      <h2>{props.todo.title}</h2>
+      <p>생성일 : {props.todo.createdAt.toDateString()}</p>
       <input
         type="checkbox"
         checked={state.isDone}
@@ -21,7 +21,7 @@ function TodoList(props: ITodo) {
           });
         }} />
       <p>{state.isDone ? "Done!" : "Not yet!"}</p>
-      <p>내 용 : {props.content}</p>
+      <p>내 용 : {props.todo.content}</p>
       <hr/>
     </div>
   )
@@ -43,9 +43,7 @@ function App() {
       <hr/>
       <div>
         {
-          state.todoList.map(seed => {
-            return TodoList(seed)
-          })
+          state.todoList.map(seed => <TodoList todo={seed} />)
         }
       </div>
       <InputTodo targetList={state.todoList} onSubmit={addTodoItem}/>
